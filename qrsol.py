@@ -2,19 +2,23 @@ import cv2
 import numpy as np
 from pyzbar.pyzbar import decode
 import mss
+import winsound
 import time
+import random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+users = [
+    {"name": "Valentýna", "surname": "Bujnošková", "email": "valmetalistka@seznam.cz", "phone": "731849514"},
+    #{"name": "Rostislav", "surname": "Bujnošek", "email": "kaminka123@seznam.cz", "phone": "604876482"},
+    {"name": "Jana", "surname": "Bujnošková", "email": "janabuj@seznam.cz", "phone": "736770619"},
+    {"name": "Jakub", "surname": "Bartoš", "email": "jkbbrts@gmail.com", "phone": "773241834"},
+    {"name": "Sebastián", "surname": "Walenta", "email": "sezbastian.walent@gmail.com", "phone": "604164664"}
+]
 # Funkce pro vyplnění a odeslání formuláře
-def fillAndSend(qr_data):
-    # Cesta k chromedriveru (změň na svou vlastní cestu)
-    driver_path = '/path/to/chromedriver'
-
-    # Inicializace prohlížeče Chrome
+def fillAndSend(user_data):
     driver = webdriver.Chrome()
 
-    # Načti webovou stránku
     url = 'https://tvrebel.cz/soutezim-s-arch-enemy/'  # Změň na URL stránky s formulářem
     driver.get(url)
 
@@ -28,10 +32,10 @@ def fillAndSend(qr_data):
     phone_input = driver.find_element(By.NAME, 'PHONE')
 
     # Vyplnění formuláře
-    name_input.send_keys('Sebastián')
-    surname_input.send_keys('Walenta')
-    email_input.send_keys('sebastian.walent@gmail.com')
-    phone_input.send_keys('604164664')
+    name_input.send_keys(user_data['name'])
+    surname_input.send_keys(user_data['surname'])
+    email_input.send_keys(user_data['email'])
+    phone_input.send_keys(user_data['phone'])
 
     # Najdi tlačítko odeslání a klikni na něj
     submit_button = driver.find_elements(By.XPATH, "//button[@type='submit']")
@@ -41,7 +45,8 @@ def fillAndSend(qr_data):
     submit_button[1].click()
 
     # Počkej na odeslání formuláře
-    time.sleep(10)
+    random_value = random.uniform(1.3, 2.2)
+    time.sleep(random_value)
 
     # Zavři prohlížeč
     driver.quit()
@@ -82,8 +87,12 @@ while True:
 
         # Vyplň a odešli formulář, pokud byl QR kód nalezen
         if("tvrebel" in qr_data):
-            fillAndSend(qr_data)
-            print("Right:"+qr_data)
+            winsound.Beep(1000,1000)
+            time.sleep(0.6)
+            #random.shuffle(users)
+            #for user in users:
+                #fillAndSend(user)
+            #print("Right:"+qr_data)
         else:
             print("False:"+qr_data)
 
