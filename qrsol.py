@@ -4,13 +4,13 @@ from pyzbar.pyzbar import decode
 import mss
 import winsound
 import time
+import winsound
 import random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 users = [
     {"name": "Valentýna", "surname": "Bujnošková", "email": "valmetalistka@seznam.cz", "phone": "731849514"},
-    #{"name": "Rostislav", "surname": "Bujnošek", "email": "kaminka123@seznam.cz", "phone": "604876482"},
     {"name": "Jana", "surname": "Bujnošková", "email": "janabuj@seznam.cz", "phone": "736770619"},
     {"name": "Jakub", "surname": "Bartoš", "email": "jkbbrts@gmail.com", "phone": "773241834"},
     {"name": "Sebastián", "surname": "Walenta", "email": "sezbastian.walent@gmail.com", "phone": "604164664"}
@@ -23,7 +23,8 @@ def fillAndSend(user_data):
     driver.get(url)
 
     # Časová prodleva, aby se stránka načetla
-    time.sleep(2)
+    random_value = random.uniform(1.3, 2.2)
+    time.sleep(random_value)
 
     # Najdi elementy na stránce podle atributu 'name'
     name_input = driver.find_element(By.NAME, 'NAME')
@@ -45,8 +46,8 @@ def fillAndSend(user_data):
     submit_button[1].click()
 
     # Počkej na odeslání formuláře
-    random_value = random.uniform(1.3, 2.2)
-    time.sleep(random_value)
+    random_value1 = random.uniform(1.3, 2.2)
+    time.sleep(random_value1)
 
     # Zavři prohlížeč
     driver.quit()
@@ -87,12 +88,12 @@ while True:
 
         # Vyplň a odešli formulář, pokud byl QR kód nalezen
         if("tvrebel" in qr_data):
-            winsound.Beep(1000,1000)
-            time.sleep(0.6)
             #random.shuffle(users)
             #for user in users:
                 #fillAndSend(user)
-            #print("Right:"+qr_data)
+            winsound.Beep(1000,1000)
+            time.sleep(0.6)
+            print("Right:"+qr_data)
         else:
             print("False:"+qr_data)
 
