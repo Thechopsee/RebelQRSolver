@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from pyzbar.pyzbar import decode
 import mss
+import winsound
 import time
 import winsound
 import random
@@ -10,7 +11,6 @@ from selenium.webdriver.common.by import By
 
 users = [
     {"name": "Valentýna", "surname": "Bujnošková", "email": "valmetalistka@seznam.cz", "phone": "731849514"},
-    {"name": "Rostislav", "surname": "Bujnošek", "email": "kaminka123@seznam.cz", "phone": "604876482"},
     {"name": "Jana", "surname": "Bujnošková", "email": "janabuj@seznam.cz", "phone": "736770619"},
     {"name": "Jakub", "surname": "Bartoš", "email": "jkbbrts@gmail.com", "phone": "773241834"},
     {"name": "Sebastián", "surname": "Walenta", "email": "sezbastian.walent@gmail.com", "phone": "604164664"}
